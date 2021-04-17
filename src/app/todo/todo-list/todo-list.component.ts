@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import Todo from '../todo.interface';
 import { TodosService } from '../todos.service';
 
@@ -9,12 +10,14 @@ import { TodosService } from '../todos.service';
 })
 export class TodoListComponent implements OnInit {
   public todoText = '';
-  public todoList: Promise<Todo[]>|null = null;
+  public todoList: Todo[] = [];
 
   constructor(public todosService: TodosService) {}
 
   ngOnInit(): void {
-    this.todoList = this.todosService.getTodos();
+    this.todosService.getTodos().subscribe((state) => {
+      this.todoList = state.todos;
+    });
   }
 
 }

@@ -1,21 +1,18 @@
 import { Injectable } from '@angular/core';
-import Todo from './todo.interface';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import IAppStore from '../app-store.interface';
+import ITodoState from './store/todo-state.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodosService {
-  private todos: Todo[] = [
-    {id: 1, text: 'test1', isCompleted: true},
-    {id: 2, text: 'test2', isCompleted: false},
-    {id: 3, text: 'test3', isCompleted: false}
-  ];
 
-  constructor() { }
+  constructor(private store: Store<IAppStore>) {}
   
-  getTodos(): Promise<Todo[]> {
-    return new Promise((resolve) => {
-      resolve(this.todos);
-    });
+  getTodos(): Observable<ITodoState> {
+    return this.store.select('todos');
   }
 }
