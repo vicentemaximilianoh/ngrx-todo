@@ -1,6 +1,6 @@
 
 <div class="todo-list">
-    <ul *ngFor="let todoItem of todoList">
+    <ul *ngFor="let todoItem of todoList | async">
         <li>{{ todoItem.text}}</li>
     </ul>
 </div>

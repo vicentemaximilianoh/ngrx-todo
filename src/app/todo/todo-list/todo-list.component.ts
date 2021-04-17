@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import Todo from '../todo.interface';
+import { TodosService } from '../todos.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -7,16 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodoListComponent implements OnInit {
   public todoText = '';
-  public todoList = [
-    {id: 1, text: 'test1'},
-    {id: 2, text: 'test2'},
-    {id: 3, text: 'test3'}
-  ];
+  public todoList: Promise<Todo[]>|null = null;
 
-  constructor() { }
+  constructor(public todosService: TodosService) {}
 
   ngOnInit(): void {
-
+    this.todoList = this.todosService.getTodos();
   }
 
 }
