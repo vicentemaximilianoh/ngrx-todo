@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { StoreModule } from '@ngrx/store';
+import { Action, StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
+import IAppStore from './app-store.interface';
 import { AppComponent } from './app.component';
-import todoReducer from './todo/store/todo.reducer';
-import { TodoModule } from './todo/todo.module';
+import {todosReducer} from './todos/store/todos.reducer';
+import { TodosModule } from './todos/todos.module';
 
 @NgModule({
   declarations: [
@@ -13,11 +14,11 @@ import { TodoModule } from './todo/todo.module';
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({
-      todos: todoReducer
+    StoreModule.forRoot<IAppStore, Action>({
+      todos: todosReducer
     }),
     AppRoutingModule,
-    TodoModule
+    TodosModule
   ],
   providers: [],
   bootstrap: [AppComponent]

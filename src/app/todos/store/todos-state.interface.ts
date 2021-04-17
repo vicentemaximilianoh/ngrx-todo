@@ -1,5 +1,5 @@
 import Todo from "../todo.interface";
 
-export default interface ITodoState {
+export default interface ITodosState {
     todos: Todo[]
 }

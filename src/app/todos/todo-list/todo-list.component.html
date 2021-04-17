@@ -1,0 +1,10 @@
+
+<div class="todo-list">
+    <form (ngSubmit)="onAddTodoItem(todoForm)" #todoForm="ngForm">
+        a-form
+        <input type="text" name="todoText" id="todoText" ngModel>
+    </form>
+    <ul *ngFor="let todoItem of todoList">
+        <li>{{ todoItem.text}}</li>
+    </ul>
+</div>

@@ -1,5 +1,5 @@
-import ITodoState from "./todo/store/todo-state.interface";
+import ITodosState from "./todos/store/todos-state.interface";
 
 export default interface IAppStore {
-    todos: ITodoState
+    todos: ITodosState
 }

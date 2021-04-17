@@ -17,4 +17,4 @@ import { FormsModule } from '@angular/forms';
     TodoListComponent
   ]
 })
-export class TodoModule { }
+export class TodosModule { }
