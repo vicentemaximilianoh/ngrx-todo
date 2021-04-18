@@ -17,18 +17,17 @@ export const todosInitialState: TodosState = {
     ]
 };
 
-function addTodo(state: any, todo: Todo) {
+function addTodo(state: any, payload: todoActions.TodosActionsPayload) {
   return {
     ...state,
     todos: [
       ...state.todos,
-      todo
+      payload.todo
     ]
   };
 }
 
-function editTodo(state: any, props: todoActions.EditTodoPayload) {
-  const {todo, text} = props;
+function editTodo(state: any, {todo, text}: todoActions.EditTodoPayload) {
   const todoIndex = state.todos.findIndex((item: Todo) => item.id === todo.id);
   
   const clonedObject = Object.assign({}, todo);
@@ -45,7 +44,7 @@ function editTodo(state: any, props: todoActions.EditTodoPayload) {
   }
 }
 
-function deleteTodo(state: any, todo: Todo) {
+function deleteTodo(state: any, {todo}: todoActions.TodosActionsPayload) {
   const todoIndex = state.todos.findIndex((item: Todo) => item.id === todo.id);
 
   const todos = [...state.todos];
@@ -59,7 +58,7 @@ function deleteTodo(state: any, todo: Todo) {
   };
 };
 
-function toggleCompleted(state: any, todo: Todo) {
+function toggleCompleted(state: any, {todo}: todoActions.TodosActionsPayload) {
   const todoIndex = state.todos.findIndex((item: Todo) => item.id === todo.id);
   
   const clonedObject = Object.assign({}, todo);

@@ -19,7 +19,7 @@ export class TodosService {
   }
 
   addTodo(todo: Todo): void {
-    this.store.dispatch(todoActions.addTodo(todo))
+    this.store.dispatch(todoActions.addTodo({todo}))
   }
 
   editTodo(payload: todoActions.EditTodoPayload): void {
@@ -27,10 +27,10 @@ export class TodosService {
   }
 
   deleteTodo(todo: Todo) {
-    this.store.dispatch(todoActions.deleteTodo(todo));
+    this.store.dispatch(todoActions.deleteTodo({todo}));
   }
 
   toggleTodo(todo: Todo) {
-    this.store.dispatch(todoActions.toggleCompleted(todo));
+    this.store.dispatch(todoActions.toggleCompleted({todo}));
   }
 }

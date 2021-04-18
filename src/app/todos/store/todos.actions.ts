@@ -2,8 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import Todo from '../todo.model';
 
 export interface TodosActionsPayload {
-  todo: Todo,
-  text?: string
+  todo: Todo
 }
 
 export interface EditTodoPayload {
@@ -17,7 +16,7 @@ export const loadTodos = createAction(
 
 export const addTodo = createAction(
   '[Todo] Add Todo',
-  props<Todo>()
+  props<TodosActionsPayload>()
 );
 
 export const editTodo = createAction(
@@ -27,12 +26,12 @@ export const editTodo = createAction(
 
 export const deleteTodo = createAction(
   '[Todo] Delete Todo',
-  props<Todo>()
+  props<TodosActionsPayload>()
 );
 
 export const toggleCompleted = createAction(
   '[Todo] Toggle Completed',
-  props<Todo>()
+  props<TodosActionsPayload>()
 );
 
 
