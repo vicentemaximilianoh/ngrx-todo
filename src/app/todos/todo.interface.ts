@@ -1,5 +1,5 @@
 
-export default interface Todo {
+export default interface ITodo {
     id: string,
     text: string,
     isCompleted?: boolean

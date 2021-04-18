@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { uniqueId } from "lodash";
 
-import Todo from '../todo.interface';
+import Todo from '../todo.model';
 import { TodosService } from '../todos.service';
 
 @Component({
@@ -26,17 +25,17 @@ export class TodoListComponent implements OnInit {
       return
     }
 
-    this.todosService.addTodo({
-      id: uniqueId(),
-      text: ngForm.controls['todoText'].value,
-      isCompleted: false
-    });
+    this.todosService.addTodo(new Todo(ngForm.controls['todoText'].value));
 
     ngForm.form.get('todoText')?.setValue(null);
   }
 
   onDeleteTodoItem(todo: Todo) {
     this.todosService.deleteTodo(todo);
+  }
+
+  onToggleTodoItem(todo: Todo) {
+    this.todosService.toggleTodo(todo);
   }
 
 }

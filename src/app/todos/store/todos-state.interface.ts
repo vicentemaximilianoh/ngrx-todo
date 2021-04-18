@@ -1,4 +1,4 @@
-import Todo from "../todo.interface";
+import Todo from "../todo.model";
 
 export default interface ITodosState {
     todos: Todo[]

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import IAppStore from '../app-store.interface';
 import ITodoState from './store/todos-state.interface';
 import * as todoActions from './store/todos.actions';
-import Todo from './todo.interface';
+import Todo from './todo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +24,9 @@ export class TodosService {
 
   deleteTodo(todo: Todo) {
     this.store.dispatch(todoActions.deleteTodo(todo));
+  }
+
+  toggleTodo(todo: Todo) {
+    this.store.dispatch(todoActions.toggleCompleted(todo));
   }
 }

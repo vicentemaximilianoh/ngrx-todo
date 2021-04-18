@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import Todo from '../todo.interface';
+import Todo from '../todo.model';
 
 export const loadTodos = createAction(
   '[Todo] Load Todos'
@@ -15,6 +15,10 @@ export const deleteTodo = createAction(
   props<Todo>()
 );
 
+export const toggleCompleted = createAction(
+  '[Todo] Toggle Completed',
+  props<Todo>()
+);
 
 
 

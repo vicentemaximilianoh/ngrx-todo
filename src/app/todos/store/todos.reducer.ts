@@ -1,7 +1,5 @@
-import { state } from '@angular/animations';
-import { Action, createReducer, on } from '@ngrx/store';
-import { uniqueId } from 'lodash';
-import Todo from '../todo.interface';
+import { createReducer, on } from '@ngrx/store';
+import Todo from '../todo.model';
 import * as todoActions from './todos.actions';
 
 
@@ -13,9 +11,9 @@ export interface TodosState {
 
 export const todosInitialState: TodosState = {
   todos: [
-      {id: uniqueId(), text: 'test1', isCompleted: true},
-      {id: uniqueId(), text: 'test2', isCompleted: false},
-      {id: uniqueId(), text: 'test3', isCompleted: false}
+      new Todo('test1'),
+      new Todo('test2'),
+      new Todo('test3')
     ]
 };
 
@@ -30,7 +28,10 @@ function addTodo(state: any, todo: Todo) {
 }
 
 function deleteTodo(state: any, todo: Todo) {
-  const todos = state.todos.filter((item: Todo) => item.id !== todo.id);
+  const todoIndex = state.todos.findIndex((item: Todo) => item.id === todo.id);
+
+  const todos = [...state.todos];
+  todos.splice(todoIndex, 1);
 
   return {
     ...state, 
@@ -40,9 +41,26 @@ function deleteTodo(state: any, todo: Todo) {
   };
 };
 
+function toggleCompleted(state: any, todo: Todo) {
+  const todoIndex = state.todos.findIndex((item: Todo) => item.id === todo.id);
+  
+  const clonedObject = Object.assign({}, todo);
+  clonedObject.isCompleted = !todo.isCompleted;
+
+  const todos = [...state.todos];
+  todos[todoIndex] = clonedObject;
+
+  return {
+    ...state,
+    todos: [
+      ...todos,
+    ]
+  }
+}
+
 export const todosReducer = createReducer(
   todosInitialState,
   on(todoActions.addTodo, addTodo),
-  on(todoActions.deleteTodo, deleteTodo)
+  on(todoActions.deleteTodo, deleteTodo),
+  on(todoActions.toggleCompleted, toggleCompleted)
 );
-
