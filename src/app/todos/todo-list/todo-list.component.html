@@ -1,20 +1,34 @@
 
 <div class="todo-list">
-    <form (ngSubmit)="onAddTodoItem(todoForm)" #todoForm="ngForm">
-        <input [(ngModel)]="todoText" type="text" name="todoText" id="todoText" ngModel>
+    <form
+        class="todo-list-form" 
+        (ngSubmit)="onAddTodoItem(todoForm)" 
+        #todoForm="ngForm">
+        <input 
+            [(ngModel)]="todoText" 
+            type="text" 
+            name="todoText" 
+            id="todoText">
     </form>
-    <ul *ngFor="let todoItem of todoList">
-        <li>
+    <ul 
+        class="todo-list-items">
+        <li 
+            class="todo-list-item"
+            *ngFor="let todoItem of todoList">
             <input 
+                class="todo-list-item-input"
                 [checked]="todoItem.isCompleted"
                 (click)="onToggleTodoItem(todoItem)" 
                 type="checkbox" 
                 name="todoCompleted{{todoItem.id}}" 
                 id="todoCompleted{{todoItem.id}}">
             <span
+                class="todo-list-item-text"
                 (click)="onEditItem(todoItem)"
                 [ngClass]="{'is-completed': todoItem.isCompleted}">{{ todoItem.text}}</span>
-            <button (click)="onDeleteTodoItem(todoItem)">X</button>
+            <button
+                class="todo-list-item-btn"
+                (click)="onDeleteTodoItem(todoItem)">X</button>
         </li>
     </ul>
 </div>
