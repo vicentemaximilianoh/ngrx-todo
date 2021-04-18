@@ -27,6 +27,24 @@ function addTodo(state: any, todo: Todo) {
   };
 }
 
+function editTodo(state: any, props: todoActions.EditTodoPayload) {
+  const {todo, text} = props;
+  const todoIndex = state.todos.findIndex((item: Todo) => item.id === todo.id);
+  
+  const clonedObject = Object.assign({}, todo);
+  clonedObject.text = text;
+
+  const todos = [...state.todos];
+  todos[todoIndex] = clonedObject;
+
+  return {
+    ...state,
+    todos: [
+      ...todos,
+    ]
+  }
+}
+
 function deleteTodo(state: any, todo: Todo) {
   const todoIndex = state.todos.findIndex((item: Todo) => item.id === todo.id);
 
@@ -61,6 +79,7 @@ function toggleCompleted(state: any, todo: Todo) {
 export const todosReducer = createReducer(
   todosInitialState,
   on(todoActions.addTodo, addTodo),
+  on(todoActions.editTodo, editTodo),
   on(todoActions.deleteTodo, deleteTodo),
   on(todoActions.toggleCompleted, toggleCompleted)
 );

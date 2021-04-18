@@ -22,6 +22,10 @@ export class TodosService {
     this.store.dispatch(todoActions.addTodo(todo))
   }
 
+  editTodo(payload: todoActions.EditTodoPayload): void {
+    this.store.dispatch(todoActions.editTodo(payload))
+  }
+
   deleteTodo(todo: Todo) {
     this.store.dispatch(todoActions.deleteTodo(todo));
   }

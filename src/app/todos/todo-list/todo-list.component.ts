@@ -10,6 +10,8 @@ import { TodosService } from '../todos.service';
   styleUrls: ['./todo-list.component.sass']
 })
 export class TodoListComponent implements OnInit {
+  public todoText: string = '';
+  public selectedItem: Todo|null = null;
   public todoList: Todo[] = [];
 
   constructor(public todosService: TodosService) {}
@@ -25,7 +27,16 @@ export class TodoListComponent implements OnInit {
       return
     }
 
-    this.todosService.addTodo(new Todo(ngForm.controls['todoText'].value));
+    if (this.selectedItem === null) {
+      this.todosService.addTodo(new Todo(ngForm.controls['todoText'].value));
+    } else {
+      
+      this.todosService.editTodo({
+        todo: this.selectedItem, 
+        text: ngForm.controls['todoText'].value
+      });
+      this.selectedItem = null;
+    }
 
     ngForm.form.get('todoText')?.setValue(null);
   }
@@ -36,6 +47,11 @@ export class TodoListComponent implements OnInit {
 
   onToggleTodoItem(todo: Todo) {
     this.todosService.toggleTodo(todo);
+  }
+
+  onEditItem(todo: Todo) {
+    this.selectedItem = todo;
+    this.todoText = this.selectedItem.text;
   }
 
 }

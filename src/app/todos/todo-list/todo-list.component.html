@@ -1,7 +1,7 @@
 
 <div class="todo-list">
     <form (ngSubmit)="onAddTodoItem(todoForm)" #todoForm="ngForm">
-        <input type="text" name="todoText" id="todoText" ngModel>
+        <input [(ngModel)]="todoText" type="text" name="todoText" id="todoText" ngModel>
     </form>
     <ul *ngFor="let todoItem of todoList">
         <li>
@@ -12,6 +12,7 @@
                 name="todoCompleted{{todoItem.id}}" 
                 id="todoCompleted{{todoItem.id}}">
             <span
+                (click)="onEditItem(todoItem)"
                 [ngClass]="{'is-completed': todoItem.isCompleted}">{{ todoItem.text}}</span>
             <button (click)="onDeleteTodoItem(todoItem)">X</button>
         </li>
