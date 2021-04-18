@@ -4,6 +4,8 @@
         <input type="text" name="todoText" id="todoText" ngModel>
     </form>
     <ul *ngFor="let todoItem of todoList">
-        <li>{{ todoItem.text}}</li>
+        <li>{{ todoItem.text}} 
+            <button (click)="onDeleteTodoItem(todoItem)">X</button>
+        </li>
     </ul>
 </div>

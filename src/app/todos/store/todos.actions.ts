@@ -10,6 +10,11 @@ export const addTodo = createAction(
   props<Todo>()
 );
 
+export const deleteTodo = createAction(
+  '[Todo] Delete Todo',
+  props<Todo>()
+);
+
 
 
 
